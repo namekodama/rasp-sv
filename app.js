@@ -8,6 +8,16 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var fs = require('fs');
+
+var dir = '/sys/class/gpio';
+var gpio2 = dir + '/gpio2';
+
+fs.writeFileSync(dir + '/export', 2); // 2ピン
+fs.writeFileSync(gpio2 + '/direction', 'out'); // 出力に設定
+
+fs.writeFileSync(gpio2 + '/value', 0);
+
 var app = express();
 
 // view engine setup
